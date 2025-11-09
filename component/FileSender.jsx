@@ -77,7 +77,7 @@ const FileSender = ({data,summary}) => {
       <h3>📄 Paste CSV data below</h3>
       <textarea
         rows="10"
-        cols="60"
+        className="w-full"
         value={inputData}
         onChange={(e) => setInputData(e.target.value)}
         placeholder="Paste CSV data (with headers) here"
