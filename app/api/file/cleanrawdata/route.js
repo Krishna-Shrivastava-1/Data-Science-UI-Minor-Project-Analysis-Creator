@@ -11,7 +11,7 @@ export async function POST(req) {
     console.log("✅ Sending to Flask:", data);
 
     // Send raw array to Flask (not wrapped inside an object)
-    const response = await fetch("http://127.0.0.1:5000/clean", {
+    const response = await fetch(`${process.env.PYTHON_BACK}/clean`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
      body: typeof data === "string" ? data : JSON.stringify(data),

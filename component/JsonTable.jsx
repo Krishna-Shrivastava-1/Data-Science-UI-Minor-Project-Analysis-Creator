@@ -36,7 +36,7 @@ const JsonTableWithChart = ({ data }) => {
   const [agg, setAgg] = useState("Count");
   const [chartType, setChartType] = useState("Bar");
   const [filters, setFilters] = useState([]);
-
+// console.log(data)
   // -------- Columns --------
   const columns = useMemo(
     () =>
@@ -175,39 +175,50 @@ const JsonTableWithChart = ({ data }) => {
   return (
     <div className="space-y-6">
        <div className="overflow-x-auto rounded-xl border border-gray-300 shadow-sm ">
-        <table className="min-w-full border-collapse">
-          <thead className="bg-background border-b">
-            <tr>
-              {columns.map((col) => (
-                <th
-                  key={col}
-                  className="px-4 py-2 text-left text-sm font-semibold border-r"
-                >
-                  {col}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((row, i) => (
-              <tr
-                key={i}
-                className={`dark `}
-              >
-                {columns.map((col) => (
-                  <td
-                    key={col}
-                    className="px-4 py-2 text-sm border-t border-neutral-700"
-                  >
-                    {row[col] !== null && row[col] !== undefined
-                      ? String(row[col])
-                      : "-"}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <table className="min-w-full border-collapse">
+  <thead className="bg-background border-b">
+    <tr>
+      {/* Row Number Column */}
+      <th className="px-4 py-2 text-left text-sm font-semibold border-r">
+        #
+      </th>
+
+      {/* Existing Columns */}
+      {columns.map((col) => (
+        <th
+          key={col}
+          className="px-4 py-2 text-left text-sm font-semibold border-r"
+        >
+          {col}
+        </th>
+      ))}
+    </tr>
+  </thead>
+
+  <tbody>
+    {data.map((row, i) => (
+      <tr key={i} className="dark">
+        {/* Row Number */}
+        <td className="px-4 py-2 text-sm border-t border-neutral-700 font-medium">
+          {i + 1}
+        </td>
+
+        {/* Existing Data Columns */}
+        {columns.map((col) => (
+          <td
+            key={col}
+            className="px-4 py-2 text-sm border-t border-neutral-700"
+          >
+            {row[col] !== null && row[col] !== undefined
+              ? String(row[col])
+              : "-"}
+          </td>
+        ))}
+      </tr>
+    ))}
+  </tbody>
+</table>
+
       </div>
       {/* Filters */}
       <div className="space-y-2">
