@@ -10,7 +10,7 @@ const Page = () => {
   const [chartData, setChartData] = useState([]);
   const [summary, setSummary] = useState({});
 
-  console.log("Summary:", summary);
+  // console.log("Summary:", summary);
 
   return (
     <div>

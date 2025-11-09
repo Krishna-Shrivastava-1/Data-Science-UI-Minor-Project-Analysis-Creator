@@ -24,14 +24,14 @@ const FileSender = ({data,summary}) => {
       }
 
       const jsonData = parsed.data;
-      console.log("✅ Parsed CSV → JSON:", jsonData);
+      // console.log("✅ Parsed CSV → JSON:", jsonData);
 
       // 2️⃣ Send JSON to Flask
       const resp = await axios.post(`/api/file/sendrawdata`, jsonData, {
         headers: { "Content-Type": "application/json" },
       });
 
-      console.log("✅ Server Response:", resp.data);
+      // console.log("✅ Server Response:", resp.data);
       setDataResp(resp.data.data?.cleaned_data || []);
       data(resp.data.data?.cleaned_data || [])
       summary(resp?.data?.data)
@@ -55,14 +55,14 @@ const FileSender = ({data,summary}) => {
       }
 
       const jsonData = parsed.data;
-      console.log("✅ Parsed CSV → JSON:", jsonData);
+      // console.log("✅ Parsed CSV → JSON:", jsonData);
 
       // 2️⃣ Send JSON to Flask
       const resp = await axios.post(`/api/file/cleanrawdata`, jsonData, {
         headers: { "Content-Type": "application/json" },
       });
 
-      console.log("✅ Server Response:", resp.data);
+      // console.log("✅ Server Response:", resp.data);
       setDataResp(resp.data.data?.cleaned_data || []);
       data(resp.data.data?.cleaned_data || [])
       summary(resp?.data?.data)

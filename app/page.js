@@ -1,10 +1,13 @@
-import FileSender from "@/component/FileSender";
+
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
    <div>
-    <FileSender />
+<Link href={'/home'}>
+Home
+</Link>
    </div>
   );
 }
