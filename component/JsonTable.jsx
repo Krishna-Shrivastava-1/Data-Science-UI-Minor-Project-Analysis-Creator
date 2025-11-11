@@ -13,6 +13,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { Button } from "@/components/ui/button";
 
 ChartJS.register(
   CategoryScale,
@@ -37,6 +38,54 @@ const JsonTableWithChart = ({ data }) => {
   const [chartType, setChartType] = useState("Bar");
   const [filters, setFilters] = useState([]);
 // console.log(data)
+// Data Downlaoder
+
+  const handleDownloadCSV = () => {
+    // 1. Data Preparation: Convert object of objects to array of objects
+    const dataArray = Object.values(data);
+
+    if (dataArray.length === 0) {
+      console.warn("No data available for download.");
+      return;
+    }
+
+    // 2. CSV Conversion Logic (Header + Rows)
+    const header = Object.keys(dataArray[0]);
+    
+    const csvRows = dataArray.map(row => 
+        header.map(fieldName => {
+            let field = row[fieldName];
+            // Basic data cleaning: handle null/undefined
+            if (field === null || field === undefined) field = ''; 
+            
+            const stringField = String(field); 
+            
+            // CSV Escaping: Wrap field in double quotes and escape internal quotes
+            return `"${stringField.replace(/"/g, '""')}"`; 
+        }).join(',')
+    );
+
+    const csvString = [
+      header.join(','), // The Header row
+      ...csvRows         // The Data rows
+    ].join('\n');
+
+    // 3. Trigger Download using Blob API
+    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'user_data_export.csv';
+    
+    // Programmatic click to start download
+    document.body.appendChild(link);
+    link.click();
+    
+    // Cleanup
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
   // -------- Columns --------
   const columns = useMemo(
     () =>
@@ -174,9 +223,11 @@ const JsonTableWithChart = ({ data }) => {
   // -------- UI --------
   return (
     <div className="space-y-6">
+     
        <div className="overflow-x-auto rounded-xl border border-gray-300 shadow-sm ">
-      <table className="min-w-full border-collapse">
-  <thead className="bg-background border-b">
+  <div className="max-h-[75vh] overflow-y-scroll">
+        <table className="min-w-full border-collapse">
+  <thead className="bg-background/40 backdrop-blur-sm border-b sticky top-0">
     <tr>
       {/* Row Number Column */}
       <th className="px-4 py-2 text-left text-sm font-semibold border-r">
@@ -218,6 +269,7 @@ const JsonTableWithChart = ({ data }) => {
     ))}
   </tbody>
 </table>
+  </div>
 
       </div>
       {/* Filters */}
@@ -290,7 +342,7 @@ const JsonTableWithChart = ({ data }) => {
           + Add Filter
         </button>
       </div>
-
+ <Button onClick={handleDownloadCSV}>Download Data</Button>
       {/* Controls */}
       <div className="flex flex-wrap gap-4 items-end">
         <div>

@@ -11,6 +11,7 @@ const FileSender = ({data,summary}) => {
 
   const sendData = async () => {
     try {
+      if(!inputData.trim() || !inputData || inputData.length === 0) return alert('No CSV Data Provided')
       // 1️⃣ Parse CSV into JSON
       const parsed = Papa.parse(inputData.trim(), {
         header: true,
@@ -42,6 +43,7 @@ const FileSender = ({data,summary}) => {
   };
   const sendCleanData = async () => {
     try {
+       if(!inputData.trim() || !inputData || inputData.length === 0) return alert('No CSV Data Provided')
       // 1️⃣ Parse CSV into JSON
       const parsed = Papa.parse(inputData.trim(), {
         header: true,
@@ -77,13 +79,14 @@ const FileSender = ({data,summary}) => {
       <h3>📄 Paste CSV data below</h3>
       <textarea
         rows="10"
-        className="w-full"
+        className="w-[80%] mx-3"
         value={inputData}
         onChange={(e) => setInputData(e.target.value)}
         placeholder="Paste CSV data (with headers) here"
+   
       />
       <br />
-      <button onClick={sendData}>Send Data</button>
+      <Button onClick={sendData}>Send Data</Button>
       <Button onClick={sendCleanData}>Clean Data</Button>
       {/* <pre>{JSON.stringify(dataResp, null, 2)}</pre> */}
       {/* <JsonTableWithChart data={dataResp} /> */}
