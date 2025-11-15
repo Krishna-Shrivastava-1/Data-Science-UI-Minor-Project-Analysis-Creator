@@ -1,9 +1,14 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Anvisul (Data Science Frontend of Skill Based Mini Project)
 
 ## Getting Started
 
-First, run the development server:
-
+First, install the dependencies:
+```bash
+npm install
+# or
+npm i
+```
+Then run the development server:
 ```bash
 npm run dev
 # or
@@ -20,17 +25,21 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Frontend Overview
 
-To learn more about Next.js, take a look at the following resources:
+The frontend is the user-facing layer responsible for receiving the CSV file, validating it, and rendering the extracted data in an interactive table format. It handles all client-side logic, including file upload, parsing, error feedback, and displaying results in a structured layout.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Technology Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Next.js** for component-based UI and routing  
+- **React Hooks** for state management  
+- **Axios / Fetch API** for communication with the Flask backend  
+- **TailwindCSS** for consistent and responsive styling  
+- **CSV Parsing Utility** (e.g., Papaparse) when light client-side parsing is needed
 
-## Deploy on Vercel
+
+## Deployed on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check out the project [Live Link](https://anvisul.vercel.app/)
